@@ -6,6 +6,8 @@ import { styles } from './styles';
 export function Home() {
   function handleAddParticipant() {}
 
+  function handleRemoveParticipant() {}
+
   return (
     <View style={styles.container}>
       <Text style={styles.eventName}>Nome do evento</Text>
@@ -20,7 +22,7 @@ export function Home() {
         </TouchableOpacity>
       </View>
 
-      <Participant />
+      <Participant name="Guest" onRemove={handleRemoveParticipant} />
     </View>
   );
 }
