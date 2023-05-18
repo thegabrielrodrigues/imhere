@@ -6,7 +6,7 @@ import { styles } from './styles';
 
 export function Home() {
   const [participantName, setParticipantName] = useState<string>('');
-  const [participants, setParticipants] = useState<string[]>(['Rodrigo', 'Vini', 'Diego', 'Biro', 'Ana', 'Isa', 'Jack', 'Mayk', 'João']);
+  const [participants, setParticipants] = useState<string[]>([]);
 
   function handleAddParticipant() {
     let formattedParticipantName = participantName.trim();
@@ -16,6 +16,9 @@ export function Home() {
 
       if (participants.includes(formattedParticipantName)) {
         Alert.alert('Participante Existente', 'Já existe um participante com esse nome.');
+      } else {
+        setParticipants((prevState) => [...prevState, formattedParticipantName]);
+        setParticipantName('');
       }
     } else {
       Alert.alert('Participante não informado', 'Insira o nome do participante para adicioná-lo à lista.');
@@ -26,9 +29,11 @@ export function Home() {
     Alert.alert('Confirmar exclusão', `Você deseja remover ${participantName}?`, [
       {
         text: 'Sim',
+        onPress: () => setParticipants(participants.filter((participant) => participant !== participantName)),
       },
       {
         text: 'Não',
+        style: 'cancel',
       },
     ]);
   }
